@@ -23,10 +23,16 @@ $(function() {
         // Si hay un valor en el campo del usuario y el valor de ambas 
         // contraseñas es igual, habilita el botón.
         // De otro modo, deshabilita el botón.
-        if(registerUser.val() && registerPassword.val() == reRegisterPassword.val()) {
+        if((registerPassword.val() == reRegisterPassword.val()) && registerPassword.val().length > 8 && reRegisterPassword.val().length > 8) {
             registerButton.prop('disabled', false);
         } else {
             registerButton.prop('disabled', true);
+        }
+    });
+
+    reRegisterPassword.blur(function() {
+        if(!(registerPassword.val() == reRegisterPassword.val())) {
+            alert("Las contraseñas no coinciden.");
         }
     });
 
