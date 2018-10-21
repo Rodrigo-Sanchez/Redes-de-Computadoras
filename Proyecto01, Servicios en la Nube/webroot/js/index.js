@@ -1,4 +1,5 @@
 $(function() {
+    var errors             = $("#errors");
     var logInUser          = $("#name");
     var logInPassword      = $("#pass");
     var logInButton        = $("#inbutton");
@@ -7,32 +8,50 @@ $(function() {
     var reRegisterPassword = $("#reregpass");
     var registerButton     = $("#nextbutton");
 
-    // Evento en logInButton cada vez que el ratón pasa encima.
-    logInButton.mouseover(function() {
+    // Evento en logInButton cada vez que el ratón entra al botón.
+    logInButton.mouseenter(function() {
+        // Mensajes de error si es que no cumple con alguna condición en inputs.
+        $(".alert").remove();
+        if(logInUser.val() == "") {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Ingresa tus datos en el campo usuario.</div>').fadeIn().fadeOut(3000);
+        } else if(logInPassword.val() == "") {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Ingresa tus datos en el campo contraseña.</div>').fadeIn().fadeOut(3000);
+        } else if(logInPassword.val().length < 8) {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> El campo contraseña debe contener al menos 8 caracteres.</div>').fadeIn().fadeOut(3000);
+        }
         // Si el valor de ambos campos tienen valores, habilita el botón.
         // De otro modo, deshabilita el botón.
-        if(logInUser.val() && logInPassword.val()) {
+        if(logInUser.val() && logInPassword.val() && logInPassword.val().length > 7) {
             logInButton.prop('disabled', false);
         } else {
             logInButton.prop('disabled', true);
         }
     });
-    
-    // Evento en nextButton cada vez que el ratón pasa encima.
-    registerButton.mouseover(function() {
-        // Si hay un valor en el campo del usuario y el valor de ambas 
-        // contraseñas es igual, habilita el botón.
+
+    // Evento en nextButton cada vez que el ratón entra al botón.
+    registerButton.mouseenter(function() {
+        // Mensajes de error si es que no cumple con alguna condición en inputs.
+        $(".alert").remove();
+        if(registerUser.val() == "") {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Ingresa tus datos en el campo usuario.</div>').fadeIn().fadeOut(3000);
+        } else if(registerPassword.val() == "") {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Ingresa tus datos en el campo contraseña.</div>').fadeIn().fadeOut(3000);
+        } else if(registerPassword.val().length < 8) {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> El campo contraseña debe contener al menos 8 caracteres.</div>').fadeIn().fadeOut(3000);
+        } else if(reRegisterPassword.val() == "") {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Ingresa tus datos en el campo repetir contraseña.</div>').fadeIn().fadeOut(3000);
+        } else if(reRegisterPassword.val().length < 8) {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> El campo repetir contraseña debe contener al menos 8 caracteres.</div>').fadeIn().fadeOut(3000);
+        } else if(registerPassword.val() != reRegisterPassword.val()) {
+            errors.append('<div class="alert alert-danger text-center"><strong>¡Atención!</strong> Los campos de la contraseña deben coincidir.</div>').fadeIn().fadeOut(3000);
+        }
+        // Si hay un valor en el campo del usuario, el valor de ambas 
+        // contraseñas es igual y mayor igual a 8, habilita el botón.
         // De otro modo, deshabilita el botón.
-        if((registerPassword.val() == reRegisterPassword.val()) && registerPassword.val().length > 8 && reRegisterPassword.val().length > 8) {
+        if(registerUser.val() && registerPassword.val() && reRegisterPassword.val() && registerPassword.val().length > 7 && reRegisterPassword.val().length > 7 && (registerPassword.val() == reRegisterPassword.val())) {
             registerButton.prop('disabled', false);
         } else {
             registerButton.prop('disabled', true);
-        }
-    });
-
-    reRegisterPassword.blur(function() {
-        if(!(registerPassword.val() == reRegisterPassword.val())) {
-            alert("Las contraseñas no coinciden.");
         }
     });
 

@@ -9,6 +9,8 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext'>
         <!-- Link al estilo de la página. -->
         <link rel="stylesheet" type="text/css" href="../webroot/css/style.css"/>
+        <!-- Link al estilo de la página de Boostrap. -->
+        <link rel="stylesheet" type="text/css" href="../webroot/css/bootstrap.min.css"/>
         <!-- Script de jQuery. -->
         <script type="text/javascript" src="../webroot/js/jquery-3.3.1.min.js"></script>
         <!-- Script de Bootstrap. -->
@@ -17,8 +19,10 @@
         <script type="text/javascript" src="../webroot/js/index.js"></script>     
     </head>
     <body>
-        <form action="home.html">
-            <div class="materialContainer">
+        <div class="container" id="errors">
+        </div>
+        <div class="materialContainer">
+            <form action="home.html">
                 <div class="box">
                     <div class="title">
                         Inicia Sesión
@@ -87,7 +91,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </body>
 </html>
